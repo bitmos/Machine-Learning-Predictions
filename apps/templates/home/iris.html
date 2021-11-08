@@ -1,0 +1,50 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Icons {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div style="align-self: center; margin: 3rem;">
+  <h1>Iris Flower Predictions</h1>
+  <form method="POST">
+      {% csrf_token %}
+      <div class="mb-4" >
+        <label for="usernameValidate">Sepal Length: </label>
+        <input type="text" class="form-control is-invalid" id="slegth"name='slength' value="{{context.slength}}"required>
+    </div>
+    <div class="mb-4" >
+        <label for="usernameValidate">Sepal width: </label>
+        <input type="text" class="form-control is-invalid" id="swidth"name='swidth' value="{{context.swidth}}"required>
+    </div>
+    <div class="mb-4" >
+        <label for="usernameValidate">Petal Length: </label>
+        <input type="text" class="form-control is-invalid" id="plength"name='plength' value="{{context.plength}}"required>
+    </div>
+    <div class="mb-4" >
+        <label for="usernameValidate">Petal Length: </label>
+        <input type="text" class="form-control is-invalid" id="pwidth"name='pwidth' value="{{context.pwidth}}"required>
+    </div>
+  
+ <br>
+ <button type="submit" class="btn btn-primary my-4">Submit</button>
+</form><br>
+{% if context.price %}
+        Result : {{ context.price }}       
+   {% endif %}</div>
+
+   
+
+      {% include "includes/footer.html" %}
+
+    </div>
+  </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+<script src="/static/assets/vendor/clipboard/dist/clipboard.min.js"></script>
+
+{% endblock javascripts %}

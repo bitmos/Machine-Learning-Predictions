@@ -1,0 +1,76 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Icons {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div style="align-self: center; margin: 3rem;">
+  <h1>House Price Predictions</h1>
+  <form method="POST">
+      {% csrf_token %}
+      <div class="mb-2" >
+        <label class="my-1 me-2" for="state">Select Location:</label>
+        <select aria-label="Default select example"  class="form-select"  id="location" name="location">
+            {% if context.selected %}
+            <option selected>{{context.selected}}</option>
+            {%endif%}
+            {% for loc in context.locations %}
+            <option size="3" value="{{loc}}">{{loc}}</option>
+  {% endfor %}
+  
+            
+        </select>
+    </div>
+      <div class="mb-4" >
+        <label for="usernameValidate">Area in sqft: </label>
+        <input type="text" class="form-control is-invalid" id="area"name='area' value="{{context.area}}"required>
+    </div>
+    
+  <div >
+    <label class="my-1 me-2" for="bhk">BHK</label>
+<select class="form-select" id="bhk" name='bhk' aria-label="Default select example">
+    <option selected>{{context.bhk}}</option>
+    <option value=1>One</option>
+    <option value=2>Two</option>
+    <option value=3>Three</option>
+    <option value=4>Four</option>
+    <option value=5>Five</option>
+    <option value=6>Six</option>
+</select>
+    </div>
+    <div >
+
+      <label class="my-1 me-2" for="bath">Bathrooms</label>
+      <select class="form-select" id="bath" name='bath' aria-label="Default select example">
+          <option selected>{{context.bath}}</option>
+          <option value=1>One</option>
+          <option value=2>Two</option>
+          <option value=3>Three</option>
+          <option value=4>Four</option>
+          <option value=5>Five</option>
+          <option value=6>Six</option>
+      </select></div>
+  
+ <br>
+ <button type="submit" class="btn btn-primary my-4">Submit</button>
+</form><br>
+{% if context.price %}
+        Result : {{ context.price }} Lakhs       
+   {% endif %}</div>
+
+   
+
+      {% include "includes/footer.html" %}
+
+    </div>
+  </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+<script src="/static/assets/vendor/clipboard/dist/clipboard.min.js"></script>
+
+{% endblock javascripts %}

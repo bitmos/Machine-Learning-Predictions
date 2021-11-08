@@ -1,0 +1,72 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Icons {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div style="align-self:center; margin: 3rem;">
+  <h1>Salary Predictions</h1>
+  <form method="POST">
+      {% csrf_token %}
+      <div class="mb-2" >
+        <label class="my-1 me-2" for="state">Company:</label>
+        <select aria-label="Default select example" class="form-select"  id="company" name="company">
+            {% if context.selected_company %}
+            <option selected>{{context.selected_company}}</option>
+            {%endif%}
+            {% for loc in context.company %}
+            <option size="3" value="{{loc}}">{{loc}}</option>
+{% endfor %}
+
+            
+        </select>
+    </div>
+    <div class="mb-2" >
+      <label class="my-1 me-2" for="state">Job:</label>
+      <select aria-label="Default select example" class="form-select"  id="job" name="job">
+          {% if context.selected_job %}
+          <option selected>{{context.selected_job}}</option>
+          {%endif%}
+          {% for loc in context.job %}
+          <option size="3" value="{{loc}}">{{loc}}</option>
+{% endfor %}
+          
+      </select>
+  </div>
+    <div class="mb-2" >
+      <label class="my-1 me-2" for="state">Degree:</label>
+      <select aria-label="Default select example"  class="form-select"  id="location" name="location">
+          {% if context.selected %}
+          <option selected>{{context.selected}}</option>
+          {%endif%}
+          {% for loc in context.degree %}
+          <option size="3" value="{{loc}}">{{loc}}</option>
+{% endfor %}
+
+          
+      </select>
+  </div>
+  
+ <br>
+ <button type="submit" class="btn btn-primary my-4">Submit</button>
+</form><br>
+{% if context.text %}
+        Result : {{ context.text }} Lakhs       
+   {% endif %}</div>
+
+   
+
+      {% include "includes/footer.html" %}
+
+    </div>
+  </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+<script src="/static/assets/vendor/clipboard/dist/clipboard.min.js"></script>
+
+{% endblock javascripts %}

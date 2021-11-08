@@ -1,0 +1,63 @@
+{% extends 'layouts/base.html' %}
+
+{% block title %} Icons {% endblock title %}
+
+<!-- Specific CSS goes HERE -->
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block content %}
+<div style="align-self: center; margin: 3rem;">
+  <h1>Titanic Survival Prediction</h1>
+  <form method="POST">
+      {% csrf_token %}
+      <div >
+          <label class="my-1 me-2" for="bhk">Passenger Class</label>
+      <select class="form-select" id="class" name='class' aria-label="Default select example">
+        {% if context.selected_class%}
+          <option selected>{{context.selected_class}}</option>
+          {% endif %}
+          <option value=1>1</option>
+          <option value=2>2</option>
+          <option value=3>3</option>
+      </select>
+          </div>
+  <div class="mb-4" >
+      <label for="usernameValidate">Age: </label>
+      <input type="text" class="form-control is-invalid" id="age"name='age' value="{{context.age}}"required>
+  </div>
+  <div class="mb-4" >
+      <label for="usernameValidate">Fare: </label>
+      <input type="text" class="form-control is-invalid" id="fare"name='fare' value="{{context.fare}}"required>
+  </div>
+
+  <div >
+      <label class="my-1 me-2" for="bhk">Gender</label>
+  <select class="form-select" id="gender" name='gender' aria-label="Default select example">
+    {% if context.selected_gender%}
+      <option selected>{{context.selected_gender}}</option>
+      {% endif %}
+      <option value="Male">Male</option>
+      <option value="Female">Female</option>
+
+  </select>
+      </div>
+  
+ 
+ <button type="submit" class="btn btn-primary my-4">Submit</button>
+</form><br>
+{% if context.price %}
+        Result : {{ context.price }}        
+   {% endif %}</div>
+
+      {% include "includes/footer.html" %}
+
+    </div>
+  </div>
+{% endblock content %}
+
+<!-- Specific JS goes HERE --> 
+{% block javascripts %}
+
+<script src="/static/assets/vendor/clipboard/dist/clipboard.min.js"></script>
+
+{% endblock javascripts %}
